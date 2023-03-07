@@ -9,8 +9,9 @@ import { filterdata } from "../Utiles/Helper";
 const Body = ()=>{
     const [restaurant, setrestaurant]=useState([]);
     const [filterrestaurant,setfilterrestaurant]=useState([]);
-    const [searchstate, setsearchstate]=useState();
-    
+    const [searchtext,setsearchtext ]=useState();
+    const [errorMessage, setErrorMessage] = useState("");
+
     useEffect(() => {
         getRestaurants();
       }, []);
@@ -25,8 +26,25 @@ const Body = ()=>{
           setrestaurant(json?.data?.cards[2]?.data?.data?.cards);
           setfilterrestaurant(json?.data?.cards[2]?.data?.data?.cards); 
       }
-    return filterrestaurant.length===0?
-    (<Shimmer/>):(
+
+      const searchData = (searchtext, restaurant) => {
+        if (searchtext !== "") {
+          const data = filterdata(searchtext, restaurant);
+          setfilterrestaurant(data);
+          setErrorMessage("");
+          if (data.length === 0) {
+            setErrorMessage(
+                `Sorry, we couldn't find any results for "${searchtext}"`
+              );
+        }
+        } else {
+            setErrorMessage("");
+          setfilterrestaurant(restaurant);
+        }
+      };
+      if (!restaurant) return null;
+
+    return (
         <>
         <div className="flex justify-center">
           <div className="w-1/2 px-4 relative search-container flex justify-center bg-[#FFF8E1] ] p-5 my-5">
@@ -48,32 +66,39 @@ const Body = ()=>{
                 type="text" 
                 className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-xl outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
                 placeholder=" search for restaurants and food   " 
-                value={searchstate} 
+                value={searchtext} 
                 onChange={
                 (e)=>{
-                    setsearchstate(e.target.value);
+                    searchData(e.target.value, restaurant);
+
+                    setsearchtext(e.target.value);
                 }}
             />
             <button
             className="search-btn p-2 m-2  bg-green-900 hover:bg-yellow-700 text-white rounded-md"
             onClick={()=>{
-                const data=filterdata(searchstate,restaurant);
-                setfilterrestaurant(data);
-                console.log(data);
-            }}
-            >
+                searchData(searchtext,restaurant)
+               
+            }}>
                 Search
             </button>
             </div>
+
           </div>
+          {errorMessage && <div className="error-container">{errorMessage}</div>}
+          {restaurant?.length === 0 ? (
+<Shimmer/>):(
             <div className="restaurant-list flex flex-wrap  justify-center ">
               {
-              filterrestaurant.map(
-                (restaurant)=>{
-                    return <CardComponent {...restaurant.data}/>
+              filterrestaurant.map
+                ((restaurant)=>{
+                    
+                    return (<CardComponent {...restaurant.data}/>)
                 }
+              
             ) },
             </div>
+)}
         </>
     )
 }
