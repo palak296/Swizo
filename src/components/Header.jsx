@@ -1,50 +1,84 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "../assets/logo.png";
-import cart from "../assets/cart.png";
-import login from "../assets/login.png";
 import { useSelector } from "react-redux";
 
-const title = (
-  <a href="/">
-    <img className="logo h-12 my-4 px-6" src={logo} alt="logo" />
-  </a>
-);
+export const ImgComponent = ({ item, itemname }) => {
+  return (
+    <a href="/">
+      {" "}
+      <img className={itemname} alt={itemname} src={item} />{" "}
+    </a>
+  );
+};
+export const Title = () => {
+  return <ImgComponent item={logo} itemname={"logo ml-2.5 w-[70px]"} />;
+};
+
 // testing
 
-const HeaderComponet = () => {
+export const NavComponent = () => {
   const cartItems = useSelector((store) => store.cart.items); //subscribed to the store. bridge between cart and store
-  //trying to make a pull request
+
   const [isLogged, setIsLogged] = useState(false);
   const handleLogin = () => setIsLogged(!isLogged);
   return (
-    <div className=" ">
-      <div className="header flex justify-between bg-[#FFF8E1]  shadow-lg shadow-[#edd791] items-center ">
-        {title}
-        <div className="nav">
-          <ul className="flex">
-            <li className="px-5 font-bold">
-              <Link to="/">Home</Link>
-            </li>
-            <li className="px-5 font-bold">
-              <Link to="/about">About</Link>
-            </li>
-            <li className="px-5 font-bold">
-              <Link to="/contact">Contact</Link>
-            </li>
-            <li className="px-5 font-bold">Cart-{cartItems.length} items</li>
-            <li className="px-5 font-bold">
+    <div className="">
+      <ul className="flex max-w-2xl items-center justify-between mt-2.5 mr-2.5">
+        <li className="p-2.5 px-5 font-bold hover:text-orange-500">
+          {" "}
+          <Link to="/">
+            <button className="nav--btn mob:w-12 mob:text-xs"> Home</button>
+          </Link>
+        </li>
+        <li className="p-2.5 px-5 font-bold hover:text-orange-500">
+          {" "}
+          <Link to="/about">
+            <button className="nav--btn mob:w-12 mob:text-xs"> About</button>
+          </Link>{" "}
+        </li>
+        <li className="p-2.5 px-5 font-bold hover:text-orange-500">
+          {" "}
+          <Link to="/instamart">
+            <button className="nav--btn mob:w-12 mob:text-xs">
               {" "}
-              <button onClick={handleLogin}>
-                {isLogged ? "Logout" : "Login"}
-              </button>
-            </li>
-            <li className="px-5 font-bold">
-              <Link to="/instamart">InstaMart</Link>
-            </li>
-          </ul>
-        </div>
-      </div>
+              Instamart
+            </button>
+          </Link>
+        </li>
+        <li className="p-2.5 px-5 font-bold hover:text-orange-500">
+          {" "}
+          <Link to="/cart">
+            <button className="nav--btn mob:w-12 mob:text-xs">
+              {" "}
+              Cart- <span className="text-orange-500">{cartItems.length}</span>
+            </button>
+          </Link>
+        </li>
+        <li className="p-2.5 px-5 font-bold hover:text-orange-500">
+          {" "}
+          <button
+            className="nav--btn mob:w-12 mob:text-xs"
+            onClick={() => {
+              handleLogin();
+            }}
+          >
+            {" "}
+            {isLogged ? "Logout " : "Login "}
+          </button>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+export const HeaderComponet = (state) => {
+  //trying to make a pull request
+
+  return (
+    <div className="flex justify-between bg-[#FFF8E1] shadow-lg shadow-[#edd791] fixed top-0 left-0 w-full h-[70px] z-50">
+      <Title />
+      <NavComponent {...state} />
     </div>
   );
 };

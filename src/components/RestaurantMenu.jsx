@@ -8,15 +8,15 @@ import { addItem } from "../Utiles/cartSlice";
 
 const RestaurantMenu = () => {
   const { resId } = useParams(); /* Read dynamic URL params */
-
   const restaurant =
     useRestaurantInfo(
       resId
     ); /* Passing resId to Custom Hooks to fetch restaurant details and returns it */
   const dispatch = useDispatch();
-  const handleAddItem = () => {
-    dispatch(addItem("grapes"));
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
   };
+
   return !restaurant ? (
     <MenuShimmer />
   ) : (
@@ -83,9 +83,9 @@ const RestaurantMenu = () => {
                     />
                   )}
                   <button
-                    className="btn btn--primary w-[118px] h-[34px] mt-2.5 bg-green-500 focus:bg-green-200 pointer-events-autopre"
+                    className="btn btn--primary w-[118px] h-[34px] mt-2.5 bg-green-500"
                     onClick={() => {
-                      handleAddItem();
+                      handleAddItem(item);
                     }}
                   >
                     {" "}

@@ -11,6 +11,7 @@ import InstaMart from "./components/Instamart";
 import store from "./Utiles/store";
 import { Provider } from "react-redux";
 import { Footer } from "./components/Footer";
+import Cart from "./components/Cart";
 
 const root = reactDom.createRoot(document.getElementById("root"));
 
@@ -18,7 +19,7 @@ const AppLayout = () => {
   return (
     <>
       <Provider store={store}>
-        <div className="bg-[#FFF8E1] w-full md:w-auto ">
+        <div className="bg-[#FFF8E1] w-full md:w-auto min-h-screen ">
           <HeaderComponet />
           <Outlet />
           <Footer />
@@ -53,6 +54,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/instamart",
         element: <InstaMart />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
