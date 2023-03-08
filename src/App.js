@@ -17,7 +17,7 @@ const AppLayout = ()=>{
     return (
         <>
             <Provider store={store}>
-              <div className="bg-[#FFF8E1] w-screen md:h-full ">
+              <div className="bg-[#FFF8E1] w-screen h-full ">
               <HeaderComponet/>
               <Outlet/> 
               <Footer/>
