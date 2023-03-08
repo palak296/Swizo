@@ -1,18 +1,20 @@
 import { useState } from "react";
 const Section=({title, text})=>{
+    const [isvisible, setisvisible]=useState(false);
 
     return (
-        <div className=" border-dotted border-4 border-black p-3 m-5">
+        <div className="w- basis-[300px] mob:basis-[150px]">
+        <div className=" border-dotted border-4 border-black p-7 m-5">
                     
         <h1 className="font-bold text-black-300 bg-red-300 text-center" >{  title}</h1> 
         {!isvisible? <button className="font-bold underline" onClick={()=>{setisvisible(true)}}>Show</button>:
         <button className="font-bold underline" onClick={()=>{setisvisible(false)}}>Hide</button>}
         <p> {isvisible?text:"" }</p>
         </div>
+        </div>
     )
 }
 const InstaMart=()=>{
-    const [isvisible, setisvisible]=useState(false);
  
     return (
         <>

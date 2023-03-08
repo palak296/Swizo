@@ -11,14 +11,16 @@ const root = reactDom.createRoot(document.getElementById("root"));
 import InstaMart from "./components/Instamart";
 import store from "./Utiles/store";
 import { Provider } from "react-redux";
+import { Footer } from "./components/Footer";
 const AppLayout = ()=>{
 
     return (
         <>
             <Provider store={store}>
-              <div className="bg-[#FFF8E1]">
+              <div className="bg-[#FFF8E1] w-screen md:h-full ">
               <HeaderComponet/>
               <Outlet/> 
+              <Footer/>
               </div>
             </Provider>
             
