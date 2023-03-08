@@ -47,7 +47,7 @@ const Body = ()=>{
     return (
         <>
         <div className="flex justify-center">
-          <div className="w-1/2 px-4 relative search-container flex justify-center bg-[#FFF8E1] ] p-5 my-5">
+          <div className="w-1/2 px-4 relative search-container flex justify-center  -[#FFF8E1] ] p-5 my-5">
           <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-5"
