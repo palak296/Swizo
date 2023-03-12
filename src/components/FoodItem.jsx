@@ -1,7 +1,13 @@
+import { useDispatch } from "react-redux";
 import { ITEM_IMG_CDN } from "./constant";
+import { removeItem } from "../Utiles/cartSlice";
 
 const FoodItem = ({ id, name, price, description, cloudinaryImageId }) => {
-  console.log(name);
+  const dispatch = useDispatch();
+
+  const handleRemoveItem = () => {
+    dispatch(removeItem(id));
+  };
 
   return (
     <div
@@ -30,9 +36,11 @@ const FoodItem = ({ id, name, price, description, cloudinaryImageId }) => {
             alt={name}
           />
         )}
-        <button className="btn btn--primary w-[118px] h-[34px] mt-2.5 bg-green-500">
-          {" "}
-          ADD +
+        <button
+          className="btn btn--primary w-[118px] h-[34px] mt-2.5 bg-red-500"
+          onClick={handleRemoveItem}
+        >
+          Remove
         </button>
       </div>
     </div>

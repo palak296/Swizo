@@ -83,13 +83,12 @@ const RestaurantMenu = () => {
                     />
                   )}
                   <button
-                    className="btn btn--primary w-[118px] h-[34px] mt-2.5 bg-green-500"
+                    className="btn btn--primary w-[118px] h-[34px] mt-2.5 bg-green-500 text-white font-bold text-lg px-4 py-2 rounded-md shadow-md transition-all duration-300 hover:bg-green-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-green-400"
                     onClick={() => {
                       handleAddItem(item);
                     }}
                   >
-                    {" "}
-                    ADD +
+                    Add +
                   </button>
                 </div>
               </div>

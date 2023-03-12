@@ -1,27 +1,65 @@
 import { useState } from "react";
-const Section=({title, text})=>{
-    const [isvisible, setisvisible]=useState(false);
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
-    return (
-        <div className="w- basis-[300px] mob:basis-[150px]">
-        <div className=" border-dotted border-4 border-black p-7 m-5">
-                    
-        <h1 className="font-bold text-black-300 bg-red-300 text-center" >{  title}</h1> 
-        {!isvisible? <button className="font-bold underline" onClick={()=>{setisvisible(true)}}>Show</button>:
-        <button className="font-bold underline" onClick={()=>{setisvisible(false)}}>Hide</button>}
-        <p> {isvisible?text:"" }</p>
-        </div>
-        </div>
-    )
-}
-const InstaMart=()=>{
- 
-    return (
-        <>
+const Section = ({ title, text }) => {
+  const [isvisible, setisvisible] = useState(false);
 
-        <Section title="About" text="is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"/>
-        <Section title="Career" text="is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"/>
-        </>
-    )
-}
-export default InstaMart
+  return (
+    <div className="w-full md:w-1/2 lg:w-1/3 mb-5 px-3">
+      <div className="border border-gray-300 p-5 rounded-md shadow-md">
+        <h1 className="font-bold text-lg mb-3 text-center">{title}</h1>
+        {!isvisible ? (
+          <button
+            className="flex items-center justify-center w-full text-gray-600 hover:text-gray-900 transition duration-300"
+            onClick={() => {
+              setisvisible(true);
+            }}
+          >
+            <FaAngleDown className="mr-2" />
+            Show
+          </button>
+        ) : (
+          <>
+            <button
+              className="flex items-center justify-center w-full text-gray-600 hover:text-gray-900 transition duration-300"
+              onClick={() => {
+                setisvisible(false);
+              }}
+            >
+              <FaAngleUp className="mr-2" />
+              Hide
+            </button>
+            <p className="mt-3">{isvisible ? text : ""}</p>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const InstaMart = () => {
+  return (
+    <div className="bg-[#FFF8E1] py-10">
+      <div className="max-w-screen-xl mx-auto px-5">
+        <h1 className="text-3xl font-bold mb-5 text-center">
+          Welcome to InstaMart
+        </h1>
+        <div className="flex flex-wrap -mx-3">
+          <Section
+            title="About"
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor, nibh nec malesuada molestie, velit libero rutrum nunc, ut semper eros nunc eget enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam dignissim magna vel eros sodales consectetur. Nulla vel eleifend lorem. "
+          />
+          <Section
+            title="Careers"
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor, nibh nec malesuada molestie, velit libero rutrum nunc, ut semper eros nunc eget enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam dignissim magna vel eros sodales consectetur. Nulla vel eleifend lorem. "
+          />
+          <Section
+            title="Contact Us"
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor, nibh nec malesuada molestie, velit libero rutrum nunc, ut semper eros nunc eget enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis e"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+export default InstaMart;
